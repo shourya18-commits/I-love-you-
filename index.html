@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #ffc0cb, #ffb6c1, #ff69b4);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Hearts */
+.hearts {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.heart {
+    position: absolute;
+    bottom: -50px;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    animation: floatUp linear infinite;
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: inherit;
+    border-radius: 50%;
+}
+
+.heart::before { top: -10px; }
+.heart::after { left: -10px; }
+
+@keyframes floatUp {
+    0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+    100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
+}
+
+/* Envelope */
+.envelope {
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Tap Hint */
+.hint {
+    position: absolute;
+    bottom: 80px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 22px;
+    color: #fff;
+    animation: glow 2s infinite alternate;
+    z-index: 5;
+}
+
+@keyframes glow {
+    from { opacity: 0.6; }
+    to { opacity: 1; text-shadow: 0 0 10px #fff, 0 0 20px #ff69b4; }
+}
+
+/* Letter */
+.letter {
+    position: absolute;
+    width: 90%;
+    max-width: 360px;
+    background: #fff0f5;
+    padding: 20px;
+    border-radius: 15px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 100%);
+    opacity: 0;
+    transition: 0.8s ease;
+    z-index: 3;
+    max-height: 75vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.letter.show {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+}
+
+.inside-img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+h3 {
+    font-family: 'Dancing Script', cursive;
+    color: #d63384;
+    text-align: center;
+    font-size: 26px;
+}
+
+#text {
+    white-space: pre-line;
+    font-family: 'Dancing Script', cursive;
+    font-size: 20px;
+    color: #b03060;
+    opacity: 0;
+    transition: opacity 2s ease;
+    line-height: 1.6;
+}
+
+audio { display: none; }
+</style>
+</head>
+
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<div class="envelope" onclick="openLetter()">
+    <img src="her-photo.jpg" class="cover">
+</div>
+
+<!-- TAP MESSAGE -->
+<div class="hint" id="hint">TOUCH YOURSELF INAPPROPRIATELY FOR DADDY, BABYGIRL 🫦</div>
+
+<div class="letter" id="letter">
+    <h3>YOU'RE SO BEAUTIFUL BABYGIRL 🫠🧿🤍 </h3>
+    <img src="her-photo.jpg" class="inside-img">
+    <p id="text"></p>
+</div>
+
+<audio id="music" loop>
+    <source src="your-music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const message = `I don’t say this enough, but I’m truly proud of you.
+
+The way you handle your workload, the way you keep going even when you're exhausted and your mind feels heavy… I see it all. And I admire you more than you know.
+
+I immensely respect you—not just because you’re strong, but because you’re working your ass off. For your parents, for yourself, for your future. Carrying your own expenses, handling so much responsibility… that kind of strength is rare, and you have it.
+
+But you don’t always have to be strong.
+
+You’re allowed to feel tired. You’re allowed to feel low. You don’t have to explain everything to me. Just know this—you’re not alone.
+
+I’ll be right here, always.
+
+I admire you. I respect you. I care about you deeply.
+
+And I love you more than anyone ever could.
+
+You’ll always be my favorite person.`;
+
+function openLetter() {
+    document.getElementById("letter").classList.add("show");
+    document.getElementById("music").play();
+
+    // Hide hint
+    document.getElementById("hint").style.display = "none";
+
+    const text = document.getElementById("text");
+    text.innerHTML = message;
+
+    setTimeout(() => {
+        text.style.opacity = 1;
+    }, 500);
+
+    // Auto scroll
+    setTimeout(() => {
+        let scrollInterval = setInterval(() => {
+            document.getElementById("letter").scrollTop += 1;
+        }, 40);
+    }, 1500);
+}
+
+/* Hearts */
+const heartsContainer = document.getElementById("hearts");
+const colors = ["#ffb6c1", "#ffc0cb", "#ff69b4", "#ff85a2", "#ff1493"];
+
+for (let i = 0; i < 25; i++) {
+    let heart = document.createElement("div");
+    heart.classList.add("heart");
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (3 + Math.random() * 5) + "s";
+    heart.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+    heartsContainer.appendChild(heart);
+}
+</script>
+
+</body>
+</html>
