@@ -71,11 +71,12 @@ body {
 /* Tap Hint */
 .hint {
     position: absolute;
-    bottom: 80px;
-    width: 100%;
+    top: calc(50% - 140px); /* dynamically above envelope */
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
     font-family: 'Dancing Script', cursive;
-    font-size: 22px;
+    font-size: 24px;
     color: #fff;
     animation: glow 2s infinite alternate;
     z-index: 5;
